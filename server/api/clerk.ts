@@ -15,9 +15,9 @@ export default defineEventHandler(async (event) => {
             statusMessage: 'You need to be logged in to view this page.'
         })
     }
-
+    return auth.userId;
     const user = await clerkClient.users.getUser(auth?.userId);
-    return user;
+
 
     try {
 
