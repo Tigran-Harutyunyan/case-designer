@@ -12,6 +12,12 @@ definePageMeta({
 
 <template>
   <div class="grid h-full place-items-center">
-    <SignIn sign-up-url="/sign-up" />
+    <SignIn
+      sign-up-url="/sign-up"
+      afterSignInUrl="/auth-callback"
+      :appearance="{
+        variables: { colorPrimary: '#16a34a' },
+      }"
+    />
   </div>
 </template>
