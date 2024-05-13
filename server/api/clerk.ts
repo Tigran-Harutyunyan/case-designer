@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
     const { data, type: eventType } = await readBody(event);
 
-    return eventType
+
 
     const { auth } = event.context;
 
@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const user = await clerkClient.users.getUser(auth?.userId);
+    return user;
 
     try {
 
