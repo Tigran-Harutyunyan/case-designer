@@ -1,0 +1,41 @@
+{
+  "name": "case-designer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3000",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "prisma generate && nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.0",
+    "nuxt": "^3.11.2",
+    "nuxt-headlessui": "^1.2.0",
+    "shadcn-nuxt": "^0.10.4",
+    "typescript": "^5.4.5",
+    "vue": "^3.4.14",
+    "vue-router": "^4.3.2"
+  },
+  "dependencies": {
+    "@nuxtjs/cloudinary": "^2.7.3",
+    "@prisma/client": "^5.13.0",
+    "@uploadthing/nuxt": "^6.5.4",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0",
+    "axios": "^1.6.8",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "dropzone-vue": "^0.1.11",
+    "h3-clerk": "^0.4.3",
+    "lucide-vue-next": "^0.378.0",
+    "prisma": "^5.13.0",
+    "radix-vue": "^1.7.4",
+    "sharp": "^0.33.3",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vue-clerk": "^0.3.5",
+    "vue-draggable-resizable": "^3.0.0"
+  }
+}
