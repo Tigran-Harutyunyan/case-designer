@@ -5,45 +5,32 @@ export default defineEventHandler(async (event) => {
 
     const { data, type: eventType } = await readBody(event);
 
+    const { id, email_addresses, image_url, first_name, last_name, username, } = data;
 
-
-    const { auth } = event.context;
-
-    if (!(auth?.userId)) {
-        return createError({
-            statusCode: 500,
-            statusMessage: 'You need to be logged in to view this page.'
-        })
+    if (!id) {
+        setResponseStatus(event, 403)
+        return ''
     }
-    return auth.userId;
-    const user = await clerkClient.users.getUser(auth?.userId);
-
 
     try {
 
         if (eventType === "user.created") {
-            const { id, email_addresses, image_url, first_name, last_name, username } = data;
-
-            if (!user?.id) {
-                throw new Error('Invalid user data')
-            }
 
             const existingUser = await db.user.findFirst({
-                where: { id: user.id },
+                where: { id },
             })
 
             if (!existingUser) {
                 await db.user.create({
                     data: {
-                        id: user.id,
-                        email: user.email,
+                        id: id,
+                        email: email_addresses?.[0]?.email_address || '',
                     },
                 })
             }
 
             return { success: true }
         }
-
 
     } catch (error) {
         return createError({
