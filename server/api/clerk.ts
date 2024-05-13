@@ -5,6 +5,8 @@ export default defineEventHandler(async (event) => {
 
     const { data, type: eventType } = await readBody(event);
 
+    return eventType
+
     const { auth } = event.context;
 
     if (!(auth?.userId)) {
