@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { SignUp } from "vue-clerk";
 useHead({
-  title: "AI companion | Sign up",
+  title: "Sign up",
 });
 definePageMeta({
   layout: "auth",
-  middleware: ["public"],
-  title: "Discord | Sign-up",
+  title: "Sign-up",
 });
 </script>
 
