@@ -67,6 +67,16 @@ const phoneCaseRef = ref(null);
 const containerRef = ref(null);
 const isPending = ref(false);
 
+const draggableHeight = computed(() => {
+  const devisor = imageDimensions.height < 2000 ? 4 : 8;
+  return imageDimensions.height / devisor;
+});
+
+const draggableWidth = computed(() => {
+  const devisor = imageDimensions.width < 2000 ? 4 : 8;
+  return imageDimensions.width / devisor;
+});
+
 function base64ToBlob(base64: string, mimeType: string) {
   const byteCharacters = atob(base64);
   const byteNumbers = new Array(byteCharacters.length);
@@ -202,10 +212,10 @@ const saveToDatabase = async (fileURL: string) => {
   <div class="relative mt-20 grid grid-cols-1 lg:grid-cols-3 mb-20 pb-20">
     <div
       ref="containerRef"
-      class="relative h-[37.5rem] overflow-hidden col-span-2 w-full max-w-4xl flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      class="relative h-[37.5rem] overflow-hidden col-span-2 w-full max-w-4xl flex items-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
     >
       <div
-        class="relative w-60 bg-opacity-50 pointer-events-none aspect-[896/1831]"
+        class="relative w-60 bg-opacity-50 pointer-events-none aspect-[896/1831] mx-auto"
       >
         <AspectRatio
           :ratio="896 / 1831"
@@ -231,26 +241,25 @@ const saveToDatabase = async (fileURL: string) => {
           "
         />
       </div>
+      <vue-draggable-resizable
+        :lock-aspect-ratio="true"
+        :prevent-deactivation="true"
+        :handles="['tl', 'tr', 'br', 'bl']"
+        :h="draggableHeight"
+        :w="draggableWidth"
+        :x="150"
+      >
+        <div class="relative">
+          <img
+            :src="imageUrl"
+            fill
+            alt="your image"
+            class="pointer-events-none"
+          />
+        </div>
+      </vue-draggable-resizable>
     </div>
 
-    <vue-draggable-resizable
-      :lock-aspect-ratio="true"
-      :prevent-deactivation="true"
-      :handles="['tl', 'tr', 'br', 'bl']"
-      :x="150"
-      :y="205"
-      :h="imageDimensions.height / 4"
-      :w="imageDimensions.width / 4"
-    >
-      <div class="relative">
-        <img
-          :src="imageUrl"
-          fill
-          alt="your image"
-          class="pointer-events-none"
-        />
-      </div>
-    </vue-draggable-resizable>
     <div
       class="h-[37.5rem] w-full col-span-full lg:col-span-1 flex flex-col bg-white"
     >
