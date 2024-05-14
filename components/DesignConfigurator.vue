@@ -247,7 +247,6 @@ const saveToDatabase = async (fileURL: string) => {
         :handles="['tl', 'tr', 'br', 'bl']"
         :h="draggableHeight"
         :w="draggableWidth"
-        :x="150"
       >
         <div class="relative">
           <img
