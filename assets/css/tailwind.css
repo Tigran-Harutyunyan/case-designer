@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&display=swap'); 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -56,8 +58,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Recursive", sans-serif;
   }
 }
+
+
+
 
 .phone-skew {
   transform: perspective(400px) rotateY(3deg) skewX(11.1deg) skewY(-10.9deg);
