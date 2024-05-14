@@ -101,12 +101,14 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
                 }
             })
 
-            await resend.emails.send({
+            const data = await resend.emails.send({
                 from: 'CaseCobra <hello@case-designer.com>',
                 to: [stripeEvent.data.object.customer_details.email],
                 subject: 'Thanks for your order!',
-                html: template,
+                html: template.html,
             })
+
+            console.log(data)
         }
     }
 
