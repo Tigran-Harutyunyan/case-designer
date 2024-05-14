@@ -3,12 +3,11 @@ import { defineStripeWebhook } from '@fixers/nuxt-stripe/server';
 import { Resend } from 'resend'
 import { db } from '@/lib/prismadb';
 import { useCompiler } from '#vue-email'
-
 /**
- * @param event - the H3 event
- * @param stipe - the Stripe instance
- * @param stripeEvent - the Stripe Webhook event
- */
+* @param event - the H3 event
+* @param stipe - the Stripe instance
+* @param stripeEvent - the Stripe Webhook event
+*/
 
 const STRIPE_API_KEY = useRuntimeConfig().stripeKey as string;
 
@@ -34,12 +33,13 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
 
         return { ok: false }
     }
+
     const session = stripeEvent.data.object as Stripe.Checkout.Session;
 
     switch (stripeEvent.type) {
         case 'checkout.session.completed': {
 
-            if (!event.data.object.customer_details?.email) {
+            if (!stripeEvent.data.object.customer_details?.email) {
                 throw new Error('Missing user email')
             }
 
@@ -84,10 +84,11 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
                 },
             })
 
-            const template = await useCompiler('@/components/emails/OrderReceivedEmail.vue', {
+            const template = await useCompiler('OrderReceivedEmail.vue', {
                 props: {
                     orderId,
                     orderDate: updatedOrder.createdAt.toLocaleDateString(),
+                    baseUrl: useRuntimeConfig().appUrl,
                     // @ts-ignore
                     shippingAddress: {
                         name: session.customer_details!.name!,
@@ -102,7 +103,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
 
             await resend.emails.send({
                 from: 'CaseCobra <hello@case-designer.com>',
-                to: [event.data.object.customer_details.email],
+                to: [stripeEvent.data.object.customer_details.email],
                 subject: 'Thanks for your order!',
                 react: template,
             })
