@@ -126,7 +126,7 @@ const footer = {
 </script>
 
 <template>
-  <EHtml lang="en">
+  <EHtml lang="en" :style="main">
     <EHead>
       <title>Email title</title>
       <meta name="description" content="Description" />

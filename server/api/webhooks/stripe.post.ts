@@ -88,7 +88,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
                 props: {
                     orderId,
                     orderDate: updatedOrder.createdAt.toLocaleDateString(),
-                    baseUrl: useRuntimeConfig().appUrl,
+                    baseUrl: useRuntimeConfig().public.appUrl,
                     // @ts-ignore
                     shippingAddress: {
                         name: session.customer_details!.name!,
@@ -105,7 +105,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
                 from: 'CaseCobra <hello@case-designer.com>',
                 to: [stripeEvent.data.object.customer_details.email],
                 subject: 'Thanks for your order!',
-                react: template,
+                html: template,
             })
         }
     }
