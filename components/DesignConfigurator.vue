@@ -231,24 +231,26 @@ const saveToDatabase = async (fileURL: string) => {
           "
         />
       </div>
-
-      <vue-draggable-resizable
-        :lock-aspect-ratio="true"
-        :class-name-resizing="'my-resizing-class'"
-        :h="imageDimensions.height / 4"
-        :w="imageDimensions.width / 4"
-      >
-        <div class="relative">
-          <img
-            :src="imageUrl"
-            fill
-            alt="your image"
-            class="pointer-events-none"
-          />
-        </div>
-      </vue-draggable-resizable>
     </div>
 
+    <vue-draggable-resizable
+      :lock-aspect-ratio="true"
+      :prevent-deactivation="true"
+      :handles="['tl', 'tr', 'br', 'bl']"
+      :x="150"
+      :y="205"
+      :h="imageDimensions.height / 4"
+      :w="imageDimensions.width / 4"
+    >
+      <div class="relative">
+        <img
+          :src="imageUrl"
+          fill
+          alt="your image"
+          class="pointer-events-none"
+        />
+      </div>
+    </vue-draggable-resizable>
     <div
       class="h-[37.5rem] w-full col-span-full lg:col-span-1 flex flex-col bg-white"
     >
