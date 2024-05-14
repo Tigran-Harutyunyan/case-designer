@@ -4,28 +4,22 @@ definePageMeta({
 });
 import { Loader2 } from "lucide-vue-next";
 import { formatPrice } from "@/lib/utils";
-import { useClerk } from "vue-clerk";
 const route = useRoute();
 const orderId = route.query?.orderId;
 
-const clerk = useClerk();
 const { showError } = useNotifications();
 const data = ref();
 
 onMounted(async () => {
-  if (clerk.user) {
-    try {
-      const response = await $fetch(`/api/payment-status?orderId=${orderId}`);
+  try {
+    const response = await $fetch(`/api/payment-status?orderId=${orderId}`);
 
-      if (!response) navigateTo("/");
-      data.value = response;
-    } catch (error: unknown) {
-      showError({
-        error,
-      });
-      navigateTo("/");
-    }
-  } else {
+    if (!response) navigateTo("/");
+    data.value = response;
+  } catch (error: unknown) {
+    showError({
+      error,
+    });
     navigateTo("/");
   }
 });
