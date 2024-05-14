@@ -67,7 +67,7 @@ export type Order = {
     updated: Date
 }
 
-type ShippingAddress = {
+export type ShippingAddress = {
     id: string,
     name: string,
     street: string,
