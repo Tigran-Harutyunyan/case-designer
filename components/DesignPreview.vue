@@ -53,6 +53,9 @@ const handleCheckout = async () => {
           configId: id,
         },
       });
+      if (response && typeof response === "object" && "url" in response) {
+        window.location.href = response.url as string;
+      }
     } catch (error) {
       showError({
         error,
