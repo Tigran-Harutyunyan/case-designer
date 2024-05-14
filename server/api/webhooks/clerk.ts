@@ -1,4 +1,3 @@
-import { clerkClient } from 'h3-clerk';
 import { db } from '@/lib/prismadb';
 
 export default defineEventHandler(async (event) => {
