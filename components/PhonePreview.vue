@@ -9,7 +9,7 @@ interface Props {
 
 const { croppedImageUrl, color } = defineProps<Props>();
 
-const refElement = ref(null);
+const refElement = ref<HTMLDivElement>();
 
 const renderedDimensions = ref({
   height: 0,
@@ -24,16 +24,26 @@ const caseBackgroundColor = computed(() => {
   return caseBackgroundColor;
 });
 
+const elementStyling = computed(() => {
+  return {
+    left:
+      renderedDimensions.value.width / 2 -
+      renderedDimensions.value.width / (1216 / 121) +
+      "px",
+    top: renderedDimensions.value.height / 6.22 + "px",
+  };
+});
+
 const handleResize = () => {
-  if (!refElement.value) return;
-  const { width, height } = refElement.value.getBoundingClientRect();
-  renderedDimensions.value = { width, height };
+  if (refElement.value) {
+    const { width, height } = refElement.value.getBoundingClientRect();
+    renderedDimensions.value = { width, height };
+  }
 };
 
 onMounted(() => {
-  handleResize();
-
   window.addEventListener("resize", handleResize);
+  handleResize();
 });
 
 onUnmounted(() => {
@@ -43,16 +53,7 @@ onUnmounted(() => {
 
 <template>
   <AspectRatio :ratio="3000 / 2001" class="relative">
-    <div
-      ref="refElement"
-      class="absolute z-20 scale-[1.0352]"
-      :style="{
-        left:
-          renderedDimensions.width / 2 -
-          renderedDimensions.width / (1216 / 121),
-        top: renderedDimensions.height / 6.22,
-      }"
-    >
+    <div class="absolute z-20 scale-[1.0352]" :style="elementStyling">
       <img
         :width="renderedDimensions.width / (3000 / 637)"
         :class="
@@ -65,7 +66,7 @@ onUnmounted(() => {
       />
     </div>
 
-    <div class="relative h-full w-full z-40">
+    <div class="relative h-full w-full z-40" ref="refElement">
       <img
         alt="phone"
         src="/clearphone.png"
@@ -74,5 +75,3 @@ onUnmounted(() => {
     </div>
   </AspectRatio>
 </template>
-
-<style lang="scss" scoped></style>
