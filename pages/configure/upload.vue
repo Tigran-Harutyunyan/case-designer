@@ -65,7 +65,11 @@ const handleUpload = async (res: Response) => {
             <CldUploadWidget
               v-slot="{ open }"
               :uploadPreset="uploadTest"
-              :options="{ maxFiles: 1 }"
+              :options="{
+                maxFiles: 1,
+                clientAllowedFormats: ['image'],
+                resourceType: 'image',
+              }"
               @upload="handleUpload"
               @onQueuesStart="isUploading = true"
             >

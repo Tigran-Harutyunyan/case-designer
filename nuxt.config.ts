@@ -29,7 +29,5 @@ export default defineNuxtConfig({
     stripeKey: process.env.STRIPE_API_KEY,
     stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
     resendApi: process.env.NUXT_RESEND_API_KEY,
-
   },
-
 })
