@@ -10,9 +10,11 @@
     "postinstall": "prisma generate && nuxt prepare"
   },
   "devDependencies": {
+    "@fixers/nuxt-stripe": "^3.0.4",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "nuxt": "^3.11.2",
     "nuxt-headlessui": "^1.2.0",
+    "nuxt-resend": "^0.0.2",
     "shadcn-nuxt": "^0.10.4",
     "typescript": "^5.4.5",
     "vue": "^3.4.14",
@@ -22,6 +24,7 @@
     "@nuxtjs/cloudinary": "^2.7.3",
     "@prisma/client": "^5.13.0",
     "@uploadthing/nuxt": "^6.5.4",
+    "@vue-email/nuxt": "^0.8.19",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "axios": "^1.6.8",
