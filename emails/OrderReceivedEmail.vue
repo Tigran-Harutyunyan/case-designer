@@ -17,14 +17,10 @@ interface Props {
   shippingAddress: ShippingAddress;
   orderId: string;
   orderDate: string;
+  baseUrl: string;
 }
 
-const { shippingAddress, orderId, orderDate } = defineProps<Props>();
-
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://case-designer.vercel.app";
+const { shippingAddress, orderId, orderDate, baseUrl } = defineProps<Props>();
 
 const paddingX = {
   paddingLeft: "40px",
