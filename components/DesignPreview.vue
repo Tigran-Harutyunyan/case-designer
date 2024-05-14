@@ -24,6 +24,7 @@ const { color, model, finish, id, material, croppedImageUrl } = configuration;
 const clerk = useClerk();
 
 const isLoginModalOpen = ref(false);
+const isLoading = ref(false);
 
 let totalPrice = computed(() => {
   let price = BASE_PRICE;
@@ -45,7 +46,7 @@ const modelLabel = computed(() => {
 const handleCheckout = async () => {
   if (clerk.user) {
     // create payment session
-
+    isLoading.value = true;
     try {
       const response = await $fetch("/api/checkout-session", {
         method: "post",
@@ -60,6 +61,7 @@ const handleCheckout = async () => {
       showError({
         error,
       });
+      isLoading.value = false;
     }
   } else {
     // need to log in
@@ -167,7 +169,11 @@ const handleCheckout = async () => {
         </div>
 
         <div class="mt-8 flex justify-end pb-12">
-          <Button @click="handleCheckout()" class="px-4 sm:px-6 lg:px-8">
+          <Button
+            @click="handleCheckout()"
+            :is-loading="isLoading"
+            class="px-4 sm:px-6 lg:px-8"
+          >
             Check out <ArrowRight class="h-4 w-4 ml-1.5 inline" />
           </Button>
         </div>
