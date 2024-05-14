@@ -160,7 +160,7 @@ const footer = {
           >Shipping to: {{ shippingAddress.name }}</EText
         >
         <EText :style="{ ...global.text, fontSize: 14 }">
-          {{ shippingAddress.street }}, {{ shippingAddress.city }},{' '}
+          {{ shippingAddress.street }}, {{ shippingAddress.city }},
           {{ shippingAddress.state }} {{ shippingAddress.postalCode }}
         </EText>
       </ESection>

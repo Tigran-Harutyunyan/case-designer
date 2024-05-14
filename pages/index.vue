@@ -150,7 +150,7 @@ import { ArrowRight, Check, Star } from "lucide-vue-next";
             <div class="text-lg leading-8">
               <p>
                 "The case feels durable and I even got a compliment on the
-                design. Had the case for two and a half months now and{' '}
+                design. Had the case for two and a half months now and
                 <span class="p-0.5 bg-slate-800 text-white">
                   the image is super clear
                 </span>
@@ -188,7 +188,7 @@ import { ArrowRight, Check, Star } from "lucide-vue-next";
                 "I usually keep my phone together with my keys in my pocket and
                 that led to some pretty heavy scratchmarks on all of my last
                 phone cases. This one, besides a barely noticeable scratch on
-                the corner,{' '}
+                the corner,
                 <span class="p-0.5 bg-slate-800 text-white">
                   looks brand new after about half a year
                 </span>
