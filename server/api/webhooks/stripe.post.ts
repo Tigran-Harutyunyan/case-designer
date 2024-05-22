@@ -84,29 +84,30 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
                 },
             })
 
-            const template = await useCompiler('OrderReceivedEmail.vue', {
-                props: {
-                    orderId,
-                    orderDate: updatedOrder.createdAt.toLocaleDateString(),
-                    baseUrl: useRuntimeConfig().public.appUrl,
-                    // @ts-ignore
-                    shippingAddress: {
-                        name: session.customer_details!.name!,
-                        city: shippingAddress!.city!,
-                        country: shippingAddress!.country!,
-                        postalCode: shippingAddress!.postal_code!,
-                        street: shippingAddress!.line1!,
-                        state: shippingAddress!.state,
-                    },
-                }
-            })
 
-            const data = await resend.emails.send({
-                from: 'CaseCobra <tigran.travel@mail.com>',
-                to: [stripeEvent.data.object.customer_details.email],
-                subject: 'Thanks for your order!',
-                html: template.html,
-            })
+            // const template = await useCompiler('OrderReceivedEmail.vue', {
+            //     props: {
+            //         orderId,
+            //         orderDate: updatedOrder.createdAt.toLocaleDateString(),
+            //         baseUrl: useRuntimeConfig().public.appUrl,
+            //         // @ts-ignore
+            //         shippingAddress: {
+            //             name: session.customer_details!.name!,
+            //             city: shippingAddress!.city!,
+            //             country: shippingAddress!.country!,
+            //             postalCode: shippingAddress!.postal_code!,
+            //             street: shippingAddress!.line1!,
+            //             state: shippingAddress!.state,
+            //         },
+            //     }
+            // })
+
+            // const data = await resend.emails.send({
+            //     from: 'CaseCobra <tigran.travel@mail.com>',
+            //     to: [stripeEvent.data.object.customer_details.email],
+            //     subject: 'Thanks for your order!',
+            //     html: template.html,
+            // })
 
 
         }
