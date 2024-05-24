@@ -8,16 +8,19 @@ import ConfettiExplosion from "vue-confetti-explosion";
 import { useClerk } from "vue-clerk";
 const { showError } = useNotifications();
 
-const { configuration } = defineProps<{
+interface Props {
   configuration: {
     color: string;
     model: string;
     finish: string;
     material: string;
     croppedImageUrl: string;
+    id: string;
   };
   id: string;
-}>();
+}
+
+const { configuration } = defineProps<Props>();
 
 const { color, model, finish, id, material, croppedImageUrl } = configuration;
 
